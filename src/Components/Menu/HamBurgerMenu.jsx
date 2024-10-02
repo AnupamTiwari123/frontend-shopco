@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './HamBurgerMenu.css';
 
-const HamburgerMenu = () => {
+const HamBurgerMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -27,4 +27,4 @@ const HamburgerMenu = () => {
     );
 };
 
-export default HamburgerMenu;
+export default HamBurgerMenu;

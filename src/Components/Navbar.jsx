@@ -1,7 +1,8 @@
 
 import { Link } from "react-router-dom"
 import "./Navbar.css"
-import HamburgerMenu from "./HamburgerMenu/HamburgerMenu"
+import HamBurgerMenu from "./Menu/HamBurgerMenu"
+
 
 function Navbar() {
 
@@ -11,7 +12,7 @@ function Navbar() {
       <nav>
         <div className="menu-icon">
 
-          <HamburgerMenu />
+          <HamBurgerMenu />
         </div>
         <div className='brand-name'>
           <Link to={"/"}><h1>SHOP.CO</h1></Link>
