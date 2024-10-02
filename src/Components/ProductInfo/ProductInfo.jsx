@@ -16,7 +16,7 @@ function ProductInfo({ user }) {
     useEffect(() => {
         const fetchProductInfo = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/products/productinfo/${params.id}`, {
+                const response = await axios.get(`backend-shopco.vercel.app/products/productinfo/${params.id}`, {
                     withCredentials: true,
                 });
                 setProduct(response.data);
@@ -28,7 +28,7 @@ function ProductInfo({ user }) {
         fetchProductInfo();
     }, [params.id]);
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/newarrivals/productinfo/${params.id}`)
+        axios.get(`backend-shopco.vercel.app/api/newarrivals/productinfo/${params.id}`)
         .then(function (response) {
                 setProduct(response.data);
 // console.log(product)
@@ -52,7 +52,7 @@ function ProductInfo({ user }) {
         try {
             const quantity = 1;
             await axios.post(
-                `${import.meta.env.VITE_API_BASE_URL}/api/cart/add`,
+                `backend-shopco.vercel.app/api/cart/add`,
                 // eslint-disable-next-line react/prop-types
                 { userId: user._id, productId, quantity, price, image },
                 {
@@ -73,7 +73,7 @@ function ProductInfo({ user }) {
 
         try {
             await axios.post(
-                `${import.meta.env.VITE_API_BASE_URL}/api/wishlist`,
+                `backend-shopco.vercel.app/api/wishlist`,
                 { productId, image },
                 {
                     headers: {

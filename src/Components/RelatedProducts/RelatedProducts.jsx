@@ -10,7 +10,7 @@ function RelatedProducts({ id }) {
     // console.log(id)
     let count = 0;
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/products`)
+        axios.get(`backend-shopco.vercel.app/api/products`)
             .then(function (response) {
 
                 // console.log(response);

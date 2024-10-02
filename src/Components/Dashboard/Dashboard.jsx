@@ -12,7 +12,7 @@ function Dashboard() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/users/me`, {
+                const response = await fetch(`backend-shopco.vercel.app/api/users/me`, {
                     method: 'GET',
                     credentials: 'include',
                 });
@@ -41,7 +41,7 @@ const { logout } = useUser();
 const handleLogout = async () => {
     try {
 
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/logout`, {
+        const response = await fetch(`backend-shopco.vercel.app/api/auth/logout`, {
             method: 'POST',
             credentials: 'include', 
         });

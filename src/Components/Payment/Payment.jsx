@@ -25,7 +25,7 @@ const Payment = ({ orderDetails }) => {
 
         try {
             // Create a payment intent on the server
-            const { data } = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/payment`, {
+            const { data } = await axios.post(`backend-shopco.vercel.app/api/payment`, {
                 // eslint-disable-next-line react/prop-types
                 amount: orderDetails.totalAmount * 100, 
                 currency: 'usd',
@@ -47,7 +47,7 @@ const Payment = ({ orderDetails }) => {
                 if (paymentResult.paymentIntent.status === 'succeeded') {
                     setSuccess(true);
      
-                    await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/orders`, {
+                    await axios.post(`backend-shopco.vercel.app/api/orders`, {
                         // eslint-disable-next-line react/prop-types
                         userId: orderDetails.userId,
                         // eslint-disable-next-line react/prop-types

@@ -7,7 +7,7 @@ function NewCollection() {
     const [newCollection, setNewCollection] = useState([]);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/newarrivals`)
+        axios.get(`backend-shopco.vercel.app/api/newarrivals`)
             .then((response) => {
                 setNewCollection(response.data);
             })

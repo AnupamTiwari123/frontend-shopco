@@ -11,7 +11,7 @@ function ProductByCategory() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/products`);
+                const response = await axios.get(`backend-shopco.vercel.app/api/products`);
                 setProducts(response.data);
             } catch (err) {
                 setError('Failed to fetch products', err);
