@@ -17,7 +17,7 @@ const ReviewForm = ({ productId, user, onReviewAdded }) => {
         try {
             const token = Cookies.get('authToken');
             await axios.post(
-                `backend-shopco.vercel.app/api/reviews/${productId}`,
+                `https://backend-shopco.vercel.app/api/reviews/${productId}`,
                 { rating, comment },
                 {
                     headers: {

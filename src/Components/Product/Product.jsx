@@ -11,7 +11,7 @@ const Product = ({ user }) => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get(`backend-shopco.vercel.app/api/products`);
+                const response = await axios.get(`https://backend-shopco.vercel.app/api/products`);
                 setProducts(response.data);
                 // console.log(response.data)
             } catch (err) {
@@ -34,7 +34,7 @@ const Product = ({ user }) => {
         try {
             const quantity = 1;
             await axios.post(
-                `backend-shopco.vercel.app/api/cart/add`,
+                `https://backend-shopco.vercel.app/api/cart/add`,
                 // eslint-disable-next-line react/prop-types
                 { userId: user._id, productId, quantity, price, image },
                 {

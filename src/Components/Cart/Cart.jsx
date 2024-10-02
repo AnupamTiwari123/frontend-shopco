@@ -16,7 +16,7 @@ const Cart = ({ user }) => {
 
             try {
                 // eslint-disable-next-line react/prop-types
-                const response = await axios.get(`backend-shopco.vercel.app/api/cart/get/${user._id}`, {
+                const response = await axios.get(`https://backend-shopco.vercel.app/api/cart/get/${user._id}`, {
                     withCredentials: true,
                 });
                 setData(response.data);
@@ -34,7 +34,7 @@ const Cart = ({ user }) => {
         try {
             const response = await axios.put(
                 // eslint-disable-next-line react/prop-types
-                `backend-shopco.vercel.app/api/cart/increase/${user._id}`,
+                `https://backend-shopco.vercel.app/api/cart/increase/${user._id}`,
                 { itemId },
                 { withCredentials: true }
             );
@@ -49,7 +49,7 @@ const Cart = ({ user }) => {
         try {
             const response = await axios.put(
                 // eslint-disable-next-line react/prop-types
-                `backend-shopco.vercel.app/api/cart/decrease/${user._id}`,
+                `https://backend-shopco.vercel.app/api/cart/decrease/${user._id}`,
                 { itemId },
                 { withCredentials: true }
             );
@@ -64,7 +64,7 @@ const Cart = ({ user }) => {
         try {
             const response = await axios.delete(
                 // eslint-disable-next-line react/prop-types
-                `backend-shopco.vercel.app/api/cart/remove/${user._id}/${itemId}`,
+                `https://backend-shopco.vercel.app/api/cart/remove/${user._id}/${itemId}`,
                 { withCredentials: true }
             );
             setData(response.data);

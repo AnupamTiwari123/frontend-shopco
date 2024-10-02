@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 function NewArrivals() {
     const [newarrivals, setNewArrivals] = useState([])
     useEffect(() => {
-        axios.get(`backend-shopco.vercel.appapi/newarrivals`)
+        axios.get(`https://backend-shopco.vercel.app/api/newarrivals`)
             .then(function (response) {
 
                 // console.log(response);

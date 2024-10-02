@@ -10,7 +10,7 @@ const OrderButton = ({ items, totalAmount, user }) => {
         try {
             // eslint-disable-next-line no-unused-vars
             const response = await axios.post(
-                `backend-shopco.vercel.app/api/orders`,
+                `https://backend-shopco.vercel.app/api/orders`,
                 {
                     // eslint-disable-next-line react/prop-types
                     user: user._id,

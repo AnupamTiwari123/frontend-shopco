@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: `backend-shopco.vercel.app/api`, 
+    baseURL: `https://backend-shopco.vercel.app/api`, 
 });
 
 export const registerUser = async (userData) => {

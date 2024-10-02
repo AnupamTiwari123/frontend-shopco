@@ -7,7 +7,7 @@ function NewCollection() {
     const [newCollection, setNewCollection] = useState([]);
 
     useEffect(() => {
-        axios.get(`backend-shopco.vercel.app/api/newarrivals`)
+        axios.get(`https://backend-shopco.vercel.app/api/newarrivals`)
             .then((response) => {
                 setNewCollection(response.data);
             })

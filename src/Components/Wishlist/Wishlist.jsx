@@ -15,7 +15,7 @@ const Wishlist = ({ user }) => {
 
             const token = Cookies.get('authToken');
             try {
-                const response = await axios.get(`backend-shopco.vercel.app/api/wishlist`, {
+                const response = await axios.get(`https://backend-shopco.vercel.app/api/wishlist`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
@@ -35,7 +35,7 @@ const Wishlist = ({ user }) => {
     const handleRemoveFromWishlist = async (wishlistItemId) => {
         const token = Cookies.get('authToken');
         try {
-            await axios.delete(`backend-shopco.vercel.app/api/wishlist/${wishlistItemId}`, {
+            await axios.delete(`https://backend-shopco.vercel.app/api/wishlist/${wishlistItemId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
