@@ -18,16 +18,16 @@ function ProductInfo({ user }) {
     useEffect(() => {
         const fetchProductInfo = async () => {
             try {
-        
+                
+                const newArrivalResponse = await axios.get(`https://backend-shopco.vercel.app/api/newarrivals/productinfo/${params.id}`, {
+                    withCredentials: true,
+                });
+                setNewArrivalProduct(newArrivalResponse.data);
                 const productResponse = await axios.get(`https://backend-shopco.vercel.app/api/products/productinfo/${params.id}`, {
                     withCredentials: true,
                 });
                 setProduct(productResponse.data);
 
-                const newArrivalResponse = await axios.get(`https://backend-shopco.vercel.app/api/newarrivals/productinfo/${params.id}`, {
-                    withCredentials: true,
-                });
-                setNewArrivalProduct(newArrivalResponse.data);
 console.log(newArrivalProduct)
             } catch (error) {
                 console.error("Failed to fetch product:", error);
