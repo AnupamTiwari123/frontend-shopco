@@ -27,15 +27,17 @@ const App = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userData = await getUserDetails();
-        setUser(userData); 
+          const userData = await getUserDetails();
+          console.log('User Data:', userData); 
+          setUser(userData); 
       } catch (err) {
-        setTimeout(() => {
-          alert("Login to buy products", err);
-        }, 3000);
+          console.error("Error fetching user details:", err); 
+          setTimeout(() => {
+              alert("Login to buy products", err);
+          }, 3000);
       }
-    };
-
+  };
+  
     fetchUser(); 
   }, []);
 
