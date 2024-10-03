@@ -8,7 +8,7 @@ import ProductReviews from "../Review/ProductReview";
 
 // eslint-disable-next-line react/prop-types
 function ProductInfo({ user }) {
-    const [product, setProduct] = useState(null);
+    // const [product, setProduct] = useState(null);
     const [newArrivalProduct, setNewArrivalProduct] = useState(null);
     const [wishlistError, setWishlistError] = useState('');
     const [loading, setLoading] = useState(true);
@@ -18,10 +18,10 @@ function ProductInfo({ user }) {
         const fetchProductInfo = async () => {
             try {
         
-                const productResponse = await axios.get(`https://backend-shopco.vercel.app/api/products/productinfo/${params.id}`, {
-                    withCredentials: true,
-                });
-                setProduct(productResponse.data);
+                // const productResponse = await axios.get(`https://backend-shopco.vercel.app/api/products/productinfo/${params.id}`, {
+                //     withCredentials: true,
+                // });
+                // setProduct(productResponse.data);
 
                 const newArrivalResponse = await axios.get(`https://backend-shopco.vercel.app/api/newarrivals/productinfo/${params.id}`, {
                     withCredentials: true,
@@ -89,12 +89,12 @@ function ProductInfo({ user }) {
         return <p>Loading product information...</p>;
     }
 
-    if (!product && !newArrivalProduct) {
+    if (!newArrivalProduct) {
         return <p>Product not found</p>;
     }
 
 
-    const displayProduct = newArrivalProduct || product;
+    const displayProduct = newArrivalProduct ;
 
     return (
         <>
