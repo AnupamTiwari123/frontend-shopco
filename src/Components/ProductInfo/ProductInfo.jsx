@@ -24,6 +24,7 @@ function ProductInfo({ user }) {
                 const newArrivals = newArrivalResponse.data;
         
                 const newArrivalProduct = newArrivals.find(item => item._id === params.id);
+                console.log(newArrivalProduct)
                 setNewArrivalProduct(newArrivalProduct || null); 
         
          
