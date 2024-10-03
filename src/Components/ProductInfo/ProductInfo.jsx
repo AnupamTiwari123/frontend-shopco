@@ -28,7 +28,7 @@ function ProductInfo({ user }) {
                     withCredentials: true,
                 });
                 setNewArrivalProduct(newArrivalResponse.data);
-
+console.log(newArrivalProduct)
             } catch (error) {
                 console.error("Failed to fetch product:", error);
             } finally {
@@ -37,6 +37,7 @@ function ProductInfo({ user }) {
         };
         
         fetchProductInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params.id]);
 
     const handleAddToCart = async (productId, price, image) => {
@@ -94,7 +95,7 @@ function ProductInfo({ user }) {
         return <p>Product not found</p>;
     }
 
-
+console.log(newArrivalProduct)
     const displayProduct = newArrivalProduct || product;
 
     return (
