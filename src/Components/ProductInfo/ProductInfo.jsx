@@ -8,7 +8,7 @@ import ProductReviews from "../Review/ProductReview";
 
 // eslint-disable-next-line react/prop-types
 function ProductInfo({ user }) {
-    // const [product, setProduct] = useState(null);
+    const [product, setProduct] = useState(null);
     const [newArrivalProduct, setNewArrivalProduct] = useState(null);
     const [wishlistError, setWishlistError] = useState('');
     const [loading, setLoading] = useState(true);
@@ -17,23 +17,27 @@ function ProductInfo({ user }) {
     useEffect(() => {
         const fetchProductInfo = async () => {
             try {
-        
-                // const productResponse = await axios.get(`https://backend-shopco.vercel.app/api/products/productinfo/${params.id}`, {
-                //     withCredentials: true,
-                // });
-                // setProduct(productResponse.data);
-
-                const newArrivalResponse = await axios.get(`https://backend-shopco.vercel.app/api/newarrivals/productinfo/${params.id}`, {
+            
+                const newArrivalResponse = await axios.get(`https://backend-shopco.vercel.app/api/newarrivals`, {
                     withCredentials: true,
                 });
-                setNewArrivalProduct(newArrivalResponse.data);
-
+                const newArrivals = newArrivalResponse.data;
+        
+                const newArrivalProduct = newArrivals.find(item => item._id === params.id);
+                setNewArrivalProduct(newArrivalProduct || null); 
+        
+         
+                const productResponse = await axios.get(`https://backend-shopco.vercel.app/api/products/productinfo/${params.id}`, {
+                    withCredentials: true,
+                });
+                setProduct(productResponse.data);
             } catch (error) {
-                console.error("Failed to fetch product:", error);
+                console.error("Failed to fetch product:", error.response ? error.response.data : error.message);
             } finally {
                 setLoading(false);
             }
         };
+        
         
         fetchProductInfo();
     }, [params.id]);
@@ -89,12 +93,12 @@ function ProductInfo({ user }) {
         return <p>Loading product information...</p>;
     }
 
-    if (!newArrivalProduct) {
+    if (!product && !newArrivalProduct) {
         return <p>Product not found</p>;
     }
 
 
-    const displayProduct = newArrivalProduct ;
+    const displayProduct = newArrivalProduct || product;
 
     return (
         <>
