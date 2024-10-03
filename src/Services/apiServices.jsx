@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: `https://backend-shopco.vercel.app/api`, 
+    baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`, 
 });
 
 export const registerUser = async (userData) => {
