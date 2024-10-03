@@ -14,7 +14,7 @@ function ProductInfo({ user }) {
     const [wishlistError, setWishlistError] = useState('');
     const [loading, setLoading] = useState(true);
     const params = useParams();
-
+console.log(params)
     useEffect(() => {
         const fetchProductInfo = async () => {
             try {
