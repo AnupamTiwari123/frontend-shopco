@@ -9,38 +9,35 @@ import ProductReviews from "../Review/ProductReview";
 // eslint-disable-next-line react/prop-types
 function ProductInfo({ user }) {
     const [product, setProduct] = useState(null);
+    const [newArrivalProduct, setNewArrivalProduct] = useState(null);
     const [wishlistError, setWishlistError] = useState('');
+    const [loading, setLoading] = useState(true);
     const params = useParams();
-
 
     useEffect(() => {
         const fetchProductInfo = async () => {
             try {
-                const response = await axios.get(`https://backend-shopco.vercel.app/productinfo/${params.id}`, {
+        
+                const productResponse = await axios.get(`https://backend-shopco.vercel.app/api/products/productinfo/${params.id}`, {
                     withCredentials: true,
                 });
-                setProduct(response.data);
+                setProduct(productResponse.data);
+
+                const newArrivalResponse = await axios.get(`https://backend-shopco.vercel.app/api/newarrivals/productinfo/${params.id}`, {
+                    withCredentials: true,
+                });
+                setNewArrivalProduct(newArrivalResponse.data);
+
             } catch (error) {
                 console.error("Failed to fetch product:", error);
+            } finally {
+                setLoading(false);
             }
         };
         
         fetchProductInfo();
     }, [params.id]);
-    useEffect(() => {
-        axios.get(`https://backend-shopco.vercel.app/api/newarrivals/productinfo/${params.id}`)
-        .then(function (response) {
-                setProduct(response.data);
-// console.log(product)
-             
-            })
-            .catch(function (error) {
 
-                console.log(error);
-            })
-         
-     
-    }, [params.id])
     const handleAddToCart = async (productId, price, image) => {
         if (!user) {
             alert('You need to be logged in to add items to the cart');
@@ -64,7 +61,7 @@ function ProductInfo({ user }) {
             );
             alert('Product added to cart');
         } catch (err) {
-            alert('Failed to add product to cart: ', err.message);
+            alert(`Failed to add product to cart: ${err.message}`);
         }
     };
 
@@ -84,45 +81,52 @@ function ProductInfo({ user }) {
             );
             alert('Added to wishlist!');
         } catch (err) {
-            setWishlistError('Failed to add to wishlist: ' + err.message);
+            setWishlistError(`Failed to add to wishlist: ${err.message}`);
         }
     };
 
-    if (!product) {
+    if (loading) {
         return <p>Loading product information...</p>;
     }
+
+    if (!product && !newArrivalProduct) {
+        return <p>Product not found</p>;
+    }
+
+
+    const displayProduct = newArrivalProduct || product;
 
     return (
         <>
             <div className="breadcrum">
-                Home <i className="fa-solid fa-greater-than"></i> Shop <i className="fa-solid fa-greater-than"></i> {product.category} <i className="fa-solid fa-greater-than"></i> {product.name}
+                Home <i className="fa-solid fa-greater-than"></i> Shop <i className="fa-solid fa-greater-than"></i> {displayProduct.category} <i className="fa-solid fa-greater-than"></i> {displayProduct.name}
             </div>
             <div className="product-section">
                 <div className="product-images">
                     <div className="small">
-                        <img src={product.image} alt={product.name} />
-                        <img src={product.image} alt={product.name} />
-                        <img src={product.image} alt={product.name} />
+                        <img src={displayProduct.image} alt={displayProduct.name} />
+                        <img src={displayProduct.image} alt={displayProduct.name} />
+                        <img src={displayProduct.image} alt={displayProduct.name} />
                     </div>
                     <div className="big">
-                        <img src={product.image} alt={product.name} />
+                        <img src={displayProduct.image} alt={displayProduct.name} />
                     </div>
                 </div>
                 <div className="product-details">
-                    <h1>{product.name}</h1>
-                    <p>{product.ratings}</p>
-                    <p>{product.description}</p>
-                    <p>${product.price ? product.price : product.newPrice}</p>
-                    <button className='cart-button' onClick={() => handleAddToCart(product._id, product.price ? product.price : product.newPrice, product.image)}>Add to Cart</button>
-                    <button className="wishlist-button" onClick={() => handleAddToWishlist(product._id, product.image)}>Add to Wishlist</button>
+                    <h1>{displayProduct.name}</h1>
+                    <p>{displayProduct.ratings}</p>
+                    <p>{displayProduct.description}</p>
+                    <p>${displayProduct.price ? displayProduct.price : displayProduct.newPrice}</p>
+                    <button className='cart-button' onClick={() => handleAddToCart(displayProduct._id, displayProduct.price ? displayProduct.price : displayProduct.newPrice, displayProduct.image)}>Add to Cart</button>
+                    <button className="wishlist-button" onClick={() => handleAddToWishlist(displayProduct._id, displayProduct.image)}>Add to Wishlist</button>
                     {wishlistError && <p style={{ color: 'red' }}>{wishlistError}</p>}
                 </div>
             </div>
             <hr />
             <br />
             {/* eslint-disable-next-line react/prop-types */}
-            {user ? <ProductReviews productId={product._id} user={user._id} /> : ""}
-            <RelatedProducts id={product.category} />
+            {user ? <ProductReviews productId={displayProduct._id} user={user._id} /> : ""}
+            <RelatedProducts id={displayProduct.category} />
         </>
     );
 }
