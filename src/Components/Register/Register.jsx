@@ -1,9 +1,8 @@
+
 import { useState } from 'react';
 import { registerUser } from '../../Services/apiServices';
 import { Link, useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie'; 
 import './Register.css';
-
 const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -15,14 +14,14 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const { token } = await registerUser({ name, email, password });
-            Cookies.set('authToken', token); // Save the token in cookies
+            await registerUser({ name, email, password });
             setSuccess('Registration successful. Please login.');
             setTimeout(() => navigate('/login'), 2000);
         } catch (err) {
             setError(err.message || 'Registration failed');
         }
     };
+
 
     return (
         <div className='registration'>
@@ -39,7 +38,7 @@ const Register = () => {
                     <div>
                         <label>Email:</label>
                         <p>
-                            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder='Enter your email' />
+                            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder='Enter you email' />
                             <i className="fa-solid fa-envelope"></i>
                         </p>
                     </div>
@@ -54,8 +53,8 @@ const Register = () => {
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 {success && <p style={{ color: 'green' }}>{success}</p>}
                 <p id='Al'>Already registered?<Link to={"/login"}>Login</Link></p>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

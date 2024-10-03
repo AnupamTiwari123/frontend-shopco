@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { loginUser } from '../../Services/apiServices';
 import { Link, useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie'; 
 import './Login.css';
 
 // eslint-disable-next-line react/prop-types
@@ -14,13 +13,14 @@ const Login = ({ setUser }) => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const { token, user } = await loginUser({ email, password });
-            Cookies.set('authToken', token); 
+            const { user } = await loginUser({ email, password });
             setUser(user); 
+
+           
+
             navigate('/dashboard'); 
         } catch (err) {
-            console.error("Login error:", err); 
-            setError(err.message || 'Login failed. Please try again.');
+            setError(err.response?.data?.message || 'Login failed. Please try again.');
         }
     };
 
