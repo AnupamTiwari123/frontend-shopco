@@ -8,7 +8,7 @@ const Wishlist = ({ user }) => {
     const [wishlist, setWishlist] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-
+console.log(user)
     useEffect(() => {
         const fetchWishlist = async () => {
             if (!user) return;
@@ -53,7 +53,7 @@ const Wishlist = ({ user }) => {
     if (loading) {
         return <p>Loading wishlist...</p>;
     }
-// console.log(wishlist)
+console.log(wishlist)
     return (
         <div className="wishlist">
             <h2>Your Wishlist</h2>
@@ -64,7 +64,7 @@ const Wishlist = ({ user }) => {
                         <li key={item._id}>
                             <img src={item.imageUrl} alt={item.name} />
                             <p>{item.name}</p>
-                            <button id="button" onClick={() => handleRemoveFromWishlist(item._id)}>Remove</button>
+                            <button id="button" onClick={() => handleRemoveFromWishlist(wishlist[0]._id)}>Remove</button>
                         </li>
                     ))}
                 </ul>
