@@ -16,7 +16,7 @@ function ProductInfo({ user }) {
     useEffect(() => {
         const fetchProductInfo = async () => {
             try {
-                const response = await axios.get(`https://backend-shopco.vercel.app/productinfo/${params.id}`, {
+                const response = await axios.get(`https://backend-shopco.vercel.app/api/productinfo/${params.id}`, {
                     withCredentials: true,
                 });
                 setProduct(response.data);
